@@ -11,7 +11,7 @@ app.use(cors());
 app.use(bodyParser.json());
 
 // Routes
-app.use('/api', userRoutes); // Prefix '/api' for all user routes
+app.use('/', userRoutes); // Prefix '/api' for all user routes
 
 // Start the server
 app.listen(PORT, () => {
