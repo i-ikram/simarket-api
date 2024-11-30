@@ -3,6 +3,7 @@ const bodyParser = require('body-parser');
 const cors = require('cors');
 const userRoutes = require('./routes/userRoutes');
 const setupSwagger = require('./swagger');
+
 require('dotenv').config();
 
 const app = express();

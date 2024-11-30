@@ -1,7 +1,36 @@
+const swaggerJsDoc = require('swagger-jsdoc'); // Ensure this is defined
+const swaggerUi = require('swagger-ui-express');
+
+// Swagger configuration
+const swaggerOptions = {
+  definition: {
+    openapi: "3.0.0",
+    info: {
+      title: "Simarket API",
+      version: "1.0.0",
+      description: "API documentation for Simarket application",
+      contact: {
+        name: "Ikram",
+      },
+    },
+    servers: [
+      {
+        url: "https://simarket-api.vercel.app",
+        description: "Production server",
+      },
+      {
+        url: "http://localhost:5000",
+        description: "Local server",
+      },
+    ],
+  },
+  apis: ['./routes/*.js'], // Adjust the path to your route files
+};
+
 const swaggerDocs = swaggerJsDoc(swaggerOptions);
 
 const setupSwagger = (app) => {
-  // Serve Swagger JSON at /api-docs/swagger.json
+  // Serve Swagger JSON
   app.get('/api-docs/swagger.json', (req, res) => {
     res.json(swaggerDocs);
   });
@@ -21,19 +50,15 @@ const setupSwagger = (app) => {
         <div id="swagger-ui"></div>
         <script>
           window.onload = function() {
-            try {
-              const ui = SwaggerUIBundle({
-                url: '/api-docs/swagger.json',
-                dom_id: '#swagger-ui',
-                presets: [
-                  SwaggerUIBundle.presets.apis,
-                  SwaggerUIStandalonePreset
-                ],
-                layout: "StandaloneLayout"
-              });
-            } catch (error) {
-              console.error('Error initializing Swagger UI:', error);
-            }
+            SwaggerUIBundle({
+              url: '/api-docs/swagger.json',
+              dom_id: '#swagger-ui',
+              presets: [
+                SwaggerUIBundle.presets.apis,
+                SwaggerUIStandalonePreset
+              ],
+              layout: "StandaloneLayout"
+            });
           };
         </script>
       </body>
