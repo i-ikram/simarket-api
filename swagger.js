@@ -30,7 +30,6 @@ const swaggerDocs = swaggerJsDoc(swaggerOptions);
 
 const setupSwagger = (app) => {
     app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocs, {
-      customCssUrl: '/custom-styles.css', // Serve from the public folder
       customSiteTitle: 'Simarket API Docs',
       customfavIcon: '/swagger-logo.png',
     }));
