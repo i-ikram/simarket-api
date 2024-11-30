@@ -3,104 +3,38 @@ const swaggerUi = require('swagger-ui-express');
 
 const swaggerOptions = {
   definition: {
-    "openapi": "3.0.0",
-    "info": {
-      "title": "Simarket API",
-      "version": "1.0.0",
-      "description": "API documentation for Simarket application",
-      "contact": {
-        "name": "Ikram"
-      }
+    openapi: "3.0.0",
+    info: {
+      title: "Simarket API",
+      version: "1.0.0",
+      description: "API documentation for Simarket application",
+      contact: {
+        name: "Ikram",
+      },
     },
-    "servers": [
+    servers: [
       {
-        "url": "https://simarket-api.vercel.app",
-        "description": "Production server"
+        url: "https://simarket-api.vercel.app",
+        description: "Production server",
       },
       {
-        "url": "http://localhost:5000",
-        "description": "Local server"
-      }
+        url: "http://localhost:5000",
+        description: "Local server",
+      },
     ],
-    "paths": {
-      "/users": {
-        "get": {
-          "summary": "Retrieve a list of users",
-          "description": "Fetches all users from the database.",
-          "responses": {
-            "200": {
-              "description": "A list of users.",
-              "content": {
-                "application/json": {
-                  "schema": {
-                    "type": "array",
-                    "items": {
-                      "type": "object",
-                      "properties": {
-                        "id": {
-                          "type": "integer",
-                          "example": 1
-                        },
-                        "name": {
-                          "type": "string",
-                          "example": "John Doe"
-                        },
-                        "email": {
-                          "type": "string",
-                          "example": "john@example.com"
-                        }
-                      }
-                    }
-                  }
-                }
-              }
-            }
-          }
-        },
-        "post": {
-          "summary": "Add a new user",
-          "description": "Adds a new user to the database.",
-          "requestBody": {
-            "required": true,
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "properties": {
-                    "name": {
-                      "type": "string",
-                      "example": "John Doe"
-                    },
-                    "email": {
-                      "type": "string",
-                      "example": "john@example.com"
-                    }
-                  }
-                }
-              }
-            }
-          },
-          "responses": {
-            "201": {
-              "description": "User successfully created."
-            }
-          }
-        }
-      }
-    }
-  },  
-  apis: ['./routes/*.js'], // Ensure path is correct
+  },
+  apis: ['./routes/*.js'], // Path to your route files
 };
 
-
+// Generate the Swagger documentation
 const swaggerDocs = swaggerJsDoc(swaggerOptions);
 
+// Function to set up Swagger UI
 const setupSwagger = (app) => {
-    app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocs, {
-      customSiteTitle: 'Simarket API Docs',
-      customfavIcon: '/swagger-logo.png',
-    }));
-  };
-  
+  app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocs, {
+    customSiteTitle: 'Simarket API Docs',
+    customfavIcon: '/swagger-logo.png', // Ensure the logo is in the correct static file directory
+  }));
+};
 
 module.exports = setupSwagger;
