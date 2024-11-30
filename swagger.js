@@ -14,7 +14,7 @@ const swaggerOptions = {
     },
     servers: [
       {
-        url: 'http://localhost:5000/api', // Update this to your deployed Vercel URL in production
+        url: 'http://localhost:5000', // Update this to your deployed Vercel URL in production
         description: 'Local server',
       },
       {
@@ -29,7 +29,12 @@ const swaggerOptions = {
 const swaggerDocs = swaggerJsDoc(swaggerOptions);
 
 const setupSwagger = (app) => {
-  app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocs));
-};
+    app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocs, {
+      customCssUrl: '/custom-styles.css', // Serve from the public folder
+      customSiteTitle: 'Simarket API Docs',
+      customfavIcon: '/swagger-logo.png',
+    }));
+  };
+  
 
 module.exports = setupSwagger;
