@@ -18,7 +18,7 @@ const swaggerOptions = {
         description: 'Local server',
       },
       {
-        url: 'https://your-vercel-app-url.vercel.app/api', // Replace with your actual Vercel URL
+        url: 'https://simarket-api.vercel.app', // Replace with your actual Vercel URL
         description: 'Production server',
       },
     ],
