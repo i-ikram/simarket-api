@@ -14,17 +14,18 @@ const swaggerOptions = {
     },
     servers: [
       {
-        url: 'http://localhost:5000', // Update this to your deployed Vercel URL in production
-        description: 'Local server',
+        url: 'https://simarket-api.vercel.app', // Correct production URL
+        description: 'Production server',
       },
       {
-        url: 'https://simarket-api.vercel.app', // Replace with your actual Vercel URL
-        description: 'Production server',
+        url: 'http://localhost:5000', // Local server for development
+        description: 'Local server',
       },
     ],
   },
-  apis: ['./routes/*.js'], // Path to your route files
+  apis: ['./routes/*.js'], // Ensure path is correct
 };
+
 
 const swaggerDocs = swaggerJsDoc(swaggerOptions);
 
