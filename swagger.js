@@ -1,36 +1,12 @@
-const swaggerJsDoc = require('swagger-jsdoc');
-const swaggerUi = require('swagger-ui-express');
-
-const swaggerOptions = {
-  definition: {
-    openapi: "3.0.0",
-    info: {
-      title: "Simarket API",
-      version: "1.0.0",
-      description: "API documentation for Simarket application",
-      contact: {
-        name: "Ikram",
-      },
-    },
-    servers: [
-      {
-        url: "https://simarket-api.vercel.app",
-        description: "Production server",
-      },
-      {
-        url: "http://localhost:5000",
-        description: "Local server",
-      },
-    ],
-  },
-  apis: ['./routes/*.js'], // Path to your route files
-};
-
-// Generate the Swagger documentation
 const swaggerDocs = swaggerJsDoc(swaggerOptions);
 
-// Function to set up Swagger UI
 const setupSwagger = (app) => {
+  // Serve Swagger JSON at /api-docs/swagger.json
+  app.get('/api-docs/swagger.json', (req, res) => {
+    res.json(swaggerDocs);
+  });
+
+  // Serve Swagger UI
   app.get('/api-docs', (req, res) => {
     res.send(`
       <!DOCTYPE html>
@@ -64,7 +40,6 @@ const setupSwagger = (app) => {
       </html>
     `);
   });
-  
 };
 
 module.exports = setupSwagger;
