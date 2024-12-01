@@ -1,4 +1,4 @@
-const swaggerJsDoc = require('swagger-jsdoc'); // Ensure this is defined
+const swaggerJsDoc = require('swagger-jsdoc');
 const swaggerUi = require('swagger-ui-express');
 
 // Swagger configuration
@@ -30,12 +30,7 @@ const swaggerOptions = {
 const swaggerDocs = swaggerJsDoc(swaggerOptions);
 
 const setupSwagger = (app) => {
-  // Serve Swagger JSON
-  app.get('/api-docs/swagger.json', (req, res) => {
-    res.json(swaggerDocs);
-  });
-
-  // Serve Swagger UI
+  // Serve the Swagger UI
   app.get('/api-docs', (req, res) => {
     res.send(`
       <!DOCTYPE html>
@@ -45,25 +40,34 @@ const setupSwagger = (app) => {
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/swagger-ui/4.14.3/swagger-ui.css" />
         <script src="https://cdnjs.cloudflare.com/ajax/libs/swagger-ui/4.14.3/swagger-ui-bundle.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/swagger-ui/4.14.3/swagger-ui-standalone-preset.js"></script>
+        <link rel="icon" href="/swagger-logo.png" type="image/png" />
+        <style>
+          .topbar { display: none; } /* Hides the Explore bar */
+        </style>
       </head>
       <body>
         <div id="swagger-ui"></div>
         <script>
           window.onload = function() {
             SwaggerUIBundle({
-              url: '/api-docs/swagger.json',
+              url: '/api-docs/swagger.json', // Points to your Swagger JSON
               dom_id: '#swagger-ui',
               presets: [
                 SwaggerUIBundle.presets.apis,
                 SwaggerUIStandalonePreset
               ],
-              layout: "StandaloneLayout"
+              layout: "BaseLayout", // Removes the Explore bar
             });
           };
         </script>
       </body>
       </html>
     `);
+  });
+
+  // Serve the Swagger JSON
+  app.get('/api-docs/swagger.json', (req, res) => {
+    res.json(swaggerDocs);
   });
 };
 
