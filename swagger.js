@@ -40,7 +40,7 @@ const setupSwagger = (app) => {
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/swagger-ui/4.14.3/swagger-ui.css" />
         <script src="https://cdnjs.cloudflare.com/ajax/libs/swagger-ui/4.14.3/swagger-ui-bundle.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/swagger-ui/4.14.3/swagger-ui-standalone-preset.js"></script>
-        <link rel="icon" href="/swagger-logo.png" type="image/png" />
+        <link rel="icon" href="/favicon.png" type="image/png" />
         <style>
           .topbar { display: none; } /* Hides the Explore bar */
         </style>
